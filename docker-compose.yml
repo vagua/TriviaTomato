@@ -1,0 +1,46 @@
+services:
+  llm:
+    build:
+      context: ./llm
+    gpus:
+      - capabilities: [gpu]
+    environment:
+      - QWEN_MODEL_ID=/models/Qwen2.5-3B-Instruct-GPTQ-Int4
+      - QWEN_LOCAL_ONLY=true
+      - QWEN_DEVICE_MAP=cuda
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    volumes:
+      - ./llm/models/Qwen2.5-3B-Instruct-GPTQ-Int4:/models/Qwen2.5-3B-Instruct-GPTQ-Int4:ro
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+    environment:
+      - LLM_URL=http://llm:9000
+    depends_on:
+      - llm
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        VITE_BACKEND_URL: http://backend:8000
+    environment:
+      - VITE_BACKEND_URL=http://backend:8000
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+    restart: unless-stopped

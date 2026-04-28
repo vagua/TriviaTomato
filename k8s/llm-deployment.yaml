@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-gateway
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: llm-gateway
+  template:
+    metadata:
+      labels:
+        app: llm-gateway
+    spec:
+      containers:
+        - name: llm
+          image: myllm:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9000
+          resources:
+            requests:
+              cpu: "1"
+              memory: "2Gi"
+              nvidia.com/gpu: 1
+            limits:
+              cpu: "2"
+              memory: "8Gi"
+              nvidia.com/gpu: 1
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-gateway  # <--- 這個名字一定要跟後端呼叫的一模一樣！
+spec:
+  selector:
+    app: llm-gateway # 對應 Deployment 的 labels
+  ports:
+  - protocol: TCP
+    port: 9000       # 這是給後端呼叫的 Port
+    targetPort: 9000 # 這是容器內部的 Port
+  type: ClusterIP    # LLM 不需要給外部連，內部通訊用 ClusterIP 即可

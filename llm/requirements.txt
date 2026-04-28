@@ -1,0 +1,11 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.0
+transformers==4.46.3
+# Needed for device_map="auto"/CUDA placement
+accelerate==1.1.1
+# Faster/safer checkpoint format; used by many HF models
+safetensors==0.4.5
+# GPTQ loading helpers used by quantized checkpoints
+optimum==1.23.3
+peft==0.10.0
+torch==2.5.1

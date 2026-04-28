@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Node / Frontend
+node_modules/
+frontend/dist/
+.vite/
+*.log
+
+# LLM 模型權重（過大，不上傳）
+llm/models/Qwen*/
+llm/models/*.bin
+llm/models/*.safetensors
+llm/models/*.gguf
+
+# IDE / 系統檔
+.vscode/
+.idea/
+.claude/
+.DS_Store
+Thumbs.db
+
+# 環境變數
+.env
+.env.local

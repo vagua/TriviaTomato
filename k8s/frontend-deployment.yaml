@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inspiration-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: inspiration-frontend
+  template:
+    metadata:
+      labels:
+        app: inspiration-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: myfrontend:v1  # 記得確認 docker build 的名字
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          env:
+            # 注意：如果這是 Vite App，這個設定可能無效，除非你有專門的 entrypoint script
+            # 建議在 docker build 時就決定好後端網址
+            - name: VITE_BACKEND_URL
+              value: "http://localhost:8000" 
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: inspiration-frontend
+spec:
+  selector:
+    app: inspiration-frontend
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  type: LoadBalancer # 這樣前端也會在 localhost:80 開啟

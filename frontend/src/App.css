@@ -1,0 +1,163 @@
+#root {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+header {
+  text-align: center;
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid #3c4043;
+  border-radius: 12px;
+  background: #1a1a1a;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-weight: 600;
+}
+
+input {
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #3d3d3d;
+  background: #0c0c0c;
+  color: #fff;
+}
+
+button {
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(120deg, #ff6b6b, #f06595);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.timer-section {
+  text-align: center;
+}
+
+.countdown {
+  font-size: 2rem;
+}
+
+.countdown .time {
+  font-size: 4rem;
+  font-weight: 600;
+}
+
+.error {
+  color: #ff8787;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  background: #1f1f1f;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 480px;
+  width: 90%;
+  color: #fff;
+}
+
+.modal ul {
+  text-align: left;
+  line-height: 1.6;
+}
+
+.quiz-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-left: 1rem;
+}
+
+.quiz-item {
+  list-style: decimal;
+}
+
+.quiz-question {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.quiz-option {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  justify-content: flex-start;
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  width: 100%;
+  border: 1px solid transparent;
+  text-align: left;
+}
+
+.quiz-option .quiz-option-label {
+  font-weight: 700;
+}
+
+.quiz-option.selected {
+  border-color: #ffd43b;
+}
+
+.quiz-option.correct {
+  border-color: #51cf66;
+}
+
+.quiz-option:disabled {
+  opacity: 1;
+  cursor: default;
+}
+
+.quiz-result {
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9rem;
+}
+
+.quiz-result.correct {
+  background: rgba(81, 207, 102, 0.12);
+}
+
+.quiz-result.incorrect {
+  background: rgba(255, 135, 135, 0.12);
+}

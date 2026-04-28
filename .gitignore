@@ -22,7 +22,6 @@ llm/models/*.gguf
 # IDE / 系統檔
 .vscode/
 .idea/
-.claude/
 .DS_Store
 Thumbs.db
 
